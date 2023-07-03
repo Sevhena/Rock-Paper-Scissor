@@ -34,37 +34,81 @@ function getComputerChoice() {
     }
 }
 
-function playRound() {
-    const computerSelection = getComputerChoice();
-
-    let playerSelection = prompt("Please enter \"ROCK\", \"PAPER\" or \"SCISSOR\":");
-    playerSelection = playerSelection.toUpperCase();
+function playRound(playerSelection, computerSelection) {
 
     //console.log("computer choice: " + computerSelection);
     //console.log("player choice: " + playerSelection);
 
     if (computerSelection === playerSelection) {
-        return "tie:" + computerSelection;
+        return "tie";
     } 
     else if ((computerSelection === "SCISSOR" && playerSelection === "PAPER")) {
-        return "cWin:" + computerSelection;
+        return "cWin";
     }
     else if (computerSelection === "PAPER" && playerSelection === "ROCK") {
-        return "cWin:" + computerSelection;
+        return "cWin";
     }
     else if (computerSelection === "ROCK" && playerSelection === "SCISSOR") {
-        return "cWin:" + computerSelection;
+        return "cWin";
     }
     else if (playerSelection === "ROCK" && computerSelection === "SCISSOR") {
-        return "pWin:" + playerSelection;
+        return "pWin";
     }
     else if (playerSelection === "PAPER" && computerSelection === "ROCK") {
-        return "pWin:" + playerSelection;
+        return "pWin";
     }
     else if (playerSelection === "SCISSOR" && computerSelection === "PAPER") {
-        return "pWin:" + playerSelection;
+        return "pWin";
     }
 }
 
-//console.log(playRound());
+function game() {
+    let cWins = 0;
+    let pWins = 0;
 
+    const MAXROUNDS = 5;
+
+    for (let i = 0; i < MAXROUNDS; i++) {
+        const computerSelection = getComputerChoice();
+
+        let playerSelection = prompt("Please enter \"ROCK\", \"PAPER\" or \"SCISSOR\":");
+        playerSelection = playerSelection.toUpperCase();
+        
+        const roundResult = playRound(playerSelection, computerSelection);
+
+        if (roundResult === "tie") {
+            pWins++;
+            cWins++;
+            console.log("It's a tie!")
+        }
+        else if (roundResult === "cWin") {
+            cWins++;
+            console.log(`${computerSelection} beats ${playerSelection}. You lose the round!`)
+        }
+        else {
+            pWins++;
+            console.log(`${playerSelection} beats ${computerSelection}. You win the round!`)
+        }
+    }
+
+    if (cWins === pWins) {
+        console.log("The game ends in a tie!\nThank you for playing!")
+    }
+    else if (pWins > cWins) {
+        console.log(`
+            Your final score: ${pWins}/${MAXROUNDS}
+            You've won the game!
+            Thank you for playing!
+        `)
+    }
+    else {
+        console.log(`
+        Your final score: ${pWins}/${MAXROUNDS}
+        Unfortunately you've lost the game.
+        Better luck next time.
+        Thank you for playing!
+        `)
+    }
+}
+
+game()
