@@ -8,7 +8,7 @@
  * The computer is the first to make its choice which is stored until the user responds.
  * As with the traditional game, 
  * choosing the same move is a tie,
- * rock winds over scissor,
+ * rock wins over scissor,
  * scissor wins over paper,
  * paper wins over rock.
  * 
@@ -21,18 +21,50 @@
 function getComputerChoice() {
     const choice = Math.floor(Math.random() * 3);
 
-    console.log(choice)
+    //console.log(choice)
 
     if (choice === 0) {
-        return "ROCK"
+        return "ROCK";
     } 
     else if (choice === 1) {
-        return "PAPER"
+        return "PAPER";
     }
     else {
-        return "SCISSOR"
+        return "SCISSOR";
     }
 }
 
-getComputerChoice()
+function playRound() {
+    const computerSelection = getComputerChoice();
+
+    let playerSelection = prompt("Please enter \"ROCK\", \"PAPER\" or \"SCISSOR\":");
+    playerSelection = playerSelection.toUpperCase();
+
+    //console.log("computer choice: " + computerSelection);
+    //console.log("player choice: " + playerSelection);
+
+    if (computerSelection === playerSelection) {
+        return "tie:" + computerSelection;
+    } 
+    else if ((computerSelection === "SCISSOR" && playerSelection === "PAPER")) {
+        return "cWin:" + computerSelection;
+    }
+    else if (computerSelection === "PAPER" && playerSelection === "ROCK") {
+        return "cWin:" + computerSelection;
+    }
+    else if (computerSelection === "ROCK" && playerSelection === "SCISSOR") {
+        return "cWin:" + computerSelection;
+    }
+    else if (playerSelection === "ROCK" && computerSelection === "SCISSOR") {
+        return "pWin:" + playerSelection;
+    }
+    else if (playerSelection === "PAPER" && computerSelection === "ROCK") {
+        return "pWin:" + playerSelection;
+    }
+    else if (playerSelection === "SCISSOR" && computerSelection === "PAPER") {
+        return "pWin:" + playerSelection;
+    }
+}
+
+//console.log(playRound());
 
