@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Caveat');   
+
+* {
+    font-family: 'Caveat', 'Times New Roman', Times, serif;
+}
+
+body {
+    box-sizing: border-box;
+    background-color: bisque;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#heading {
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 30vh;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 70px;
+}
+
+#buttons {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+:root {
+    --inactive-button-color: rgb(194, 49, 68);
+    --active-button-color: rgb(162, 32, 49);
+}
+
+.option {
+    /* border-style: none; */
+    width: 190px;
+    height: 135px;
+    margin: 0 20px;
+    padding: 0;
+    border-radius: 20px;
+    background-color: var(--inactive-button-color);
+    font-size: xx-large;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.option:hover {background-color: var(--active-button-color);}
+
+.option:active {
+    background-color: var(--inactive-button-color);
+    transform: translateY(4px);
+}
+
+#rock {
+    margin-left: auto;
+}
+
