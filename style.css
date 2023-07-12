@@ -18,7 +18,7 @@ body {
     background-color: rgb(215, 77, 77);
     justify-content: space-around;
     align-items: center;
-    width: max(50vw, 700px);
+    width: max(40vw, 500px);
     height: 35px;
     border: 2px solid black;
     border-radius: 10px;
@@ -68,14 +68,31 @@ body {
     cursor: pointer;
 }
 
-.option:hover {background-color: var(--active-button-color);}
+.option:hover, 
+.button:hover {background-color: var(--active-button-color);}
 
-.option:active {
+.option:active,
+.button:active {
     background-color: var(--inactive-button-color);
     transform: translateY(4px);
 }
 
-#rock {
-    margin-left: auto;
+#final-message {
+    display: none;
+    text-align: center;
+    font-size: 25px;
+}
+
+#play-again-button {
+    display: none;
+    margin: 40px auto;  
+    padding: 0;
+    width: 150px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 25px;
+    background-color: var(--inactive-button-color);
+    cursor: pointer;
 }
 

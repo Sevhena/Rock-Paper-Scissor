@@ -63,26 +63,31 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function endGame(winner) {
+    statusBar.style.display = 'none';
+    messageBox.style.display = 'none';
+    document.querySelector('#buttons').style.display = 'none';
+    
     if (winner === "p") {
-        console.log(`
-            You've won the game!
-            Thank you for playing!
-            Final score: ${pWins} wins, ${cWins} losses
-        `)
+        heading.textContent = 'You Win!'
+        finalMessage.textContent = `
+        Congratulations on making it to 5 points before the computer!
+        It was a a tough game but you've proven yourself to be even tougher!
+        Thanks for playing!`
     }
     else {
-        console.log(`
-        Unfortunately you've lost the game.
-        Better luck next time.
-        Thank you for playing!
-        Final score: ${pWins} wins, ${cWins} losses
-        `)
+        heading.textContent = 'You Lose...'
+        finalMessage.textContent = `
+        You fought long and hard but it simply was not meant to be.
+        Come again if you dare...`
     }
+    heading.style.display = 'block';
+    finalMessage.style.display = 'block';
+    playAgain.style.display = 'block';
 }
 
 function startGame() {
-    document.querySelector('#heading').style.display = 'none';
-    document.querySelector('#status-bar').style.display = 'flex';
+    heading.style.display = 'none';
+    statusBar.style.display = 'flex';
     messageBox.style.display = 'flex';
 }
 
@@ -94,11 +99,15 @@ let rounds = 0;
 let gameStarted = false;
 
 //HTML ELEMENTS
+const statusBar = document.querySelector('#status-bar');
+const heading = document.querySelector('#heading');
 const buttons = document.querySelectorAll('button');
 const numRounds = document.querySelector('#num-rounds');
 const userPoints = document.querySelector('#user-points');
 const computerPoints = document.querySelector('#computer-points');
 const messageBox = document.querySelector('#message-box');
+const finalMessage = document.querySelector('#final-message');
+const playAgain = document.querySelector("#play-again-button");
 
 buttons.forEach(button => {
 
@@ -129,11 +138,16 @@ buttons.forEach(button => {
             messageBox.textContent = `${playerSelection} against ${computerSelection}. It's a tie!`
         }
 
-        if (cWins == 5 || pWins == 5) {endGame(cWins == 5 ? "c" : "p");}
+        if (cWins == 5 || pWins == 5) {
+            endGame(cWins === 5 ? "c" : "p");
+            //console.log(winner);
+            // const endHeading = document.querySelector("#heading-end");
+            // endHeading = winner == "p" ? "You Win!" : "You Lost...";
+        }
     });
 });
 
-
+playAgain.addEventListener('click', () => {window.location.reload()});
 
 
 
