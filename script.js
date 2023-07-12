@@ -80,25 +80,53 @@ function endGame(winner) {
     }
 }
 
+function startGame() {
+    document.querySelector('#heading').style.display = 'none';
+    document.querySelector('#status-bar').style.display = 'flex';
+    messageBox.style.display = 'flex';
+}
+
 
 let cWins = 0;
 let pWins = 0;
+let rounds = 0;
 
+let gameStarted = false;
+
+//HTML ELEMENTS
 const buttons = document.querySelectorAll('button');
+const numRounds = document.querySelector('#num-rounds');
+const userPoints = document.querySelector('#user-points');
+const computerPoints = document.querySelector('#computer-points');
+const messageBox = document.querySelector('#message-box');
 
 buttons.forEach(button => {
 
     button.addEventListener('click', (event) => {
+        if (!gameStarted) {
+            gameStarted = true;
+            startGame();
+        }
+
         const computerSelection = getComputerChoice();
         const playerSelection = event.target.id;
         const roundResult = playRound(playerSelection, computerSelection);
+        
+        numRounds.textContent = ++rounds;
+        
         if (roundResult === "cWin") {
             cWins++;
-            console.log(`${computerSelection} beats ${playerSelection}. You lose the round!`)
+            computerPoints.textContent = cWins;
+            messageBox.textContent = `${computerSelection} beats ${playerSelection}. You lose the round!`;
         }
         else if (roundResult === 'pWin') {
             pWins++;
-            console.log(`${playerSelection} beats ${computerSelection}. You win the round!`)
+            userPoints.textContent = pWins;
+            messageBox.textContent = `
+            ${playerSelection} beats ${computerSelection}. You win the round!`;
+        }
+        else {
+            messageBox.textContent = `${playerSelection} against ${computerSelection}. It's a tie!`
         }
 
         if (cWins == 5 || pWins == 5) {endGame(cWins == 5 ? "c" : "p");}
